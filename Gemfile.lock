@@ -1,0 +1,30 @@
+GIT
+  remote: https://github.com/kubernetes-client/ruby
+  revision: 7f268172bcc5a44e13e069f48f6b0c74d5362659
+  specs:
+    kubernetes (1.0.0.pre.alpha1)
+      json (~> 2.1, >= 2.1.0)
+      typhoeus (~> 1.0, >= 1.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ethon (0.11.0)
+      ffi (>= 1.3.0)
+    ffi (1.9.23)
+    json (2.1.0)
+    puma (3.11.3)
+    rack (2.0.4)
+    typhoeus (1.3.0)
+      ethon (>= 0.9.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  kubernetes!
+  puma
+  rack
+
+BUNDLED WITH
+   1.16.1
