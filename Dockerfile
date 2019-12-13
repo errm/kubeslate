@@ -1,5 +1,6 @@
 FROM alpine:3.10 as build
 
+SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 ENV BUNDLE_SILENCE_ROOT_WARNING=1
 
 WORKDIR /app
@@ -12,14 +13,15 @@ RUN apk add --no-cache \
    ruby-dev \
    ruby-ffi
 
-ADD Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock ./
+
 RUN bundle install --frozen -j4 -r3 --no-cache --without development test \
  && bundle clean --force \
  && rm -rf /usr/lib/ruby/gems/*/cache \
  && scanelf --needed --nobanner --recursive /usr/lib/ruby/gems \
       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
       | sort -u \
-      | xargs -r apk info --installed \
+      | xargs -r ash -c 'apk info --installed "$@" || true' \
       | sort -u > .rundeps
 
 COPY . .
