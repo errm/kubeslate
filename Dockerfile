@@ -1,4 +1,4 @@
-FROM alpine:3.7 as build
+FROM alpine:3.10 as build
 
 ENV BUNDLE_SILENCE_ROOT_WARNING=1
 
@@ -32,7 +32,7 @@ RUN rm -rf \
       spec \
       tmp
 
-FROM alpine:3.7
+FROM alpine:3.10
 
 ENV WEB_CONCURRENCY=4 \
     WEB_MAX_THREADS=4 \
